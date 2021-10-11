@@ -4,10 +4,6 @@ FROM PortfolioProject.dbo.CovidDeaths
 WHERE continent IS NOT NULL
 ORDER BY 3,4
 
-SELECT *
-FROM PortfolioProject.dbo.CovidVaccinations
-ORDER BY 3,4
-
 SELECT location, date, population, total_cases, new_cases, total_deaths, new_deaths
 FROM PortfolioProject.dbo.CovidDeaths
 WHERE continent IS NOT NULL
