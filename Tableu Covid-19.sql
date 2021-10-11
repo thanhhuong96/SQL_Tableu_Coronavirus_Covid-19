@@ -26,35 +26,3 @@ SELECT location, population, date, MAX(total_cases) AS HighestInfectionCount, MA
 FROM PortfolioProject.dbo.CovidDeaths
 GROUP BY location, population, date
 ORDER BY PercentPopulationInfected DESC
-
-----------------------------------------------------
-
--- 5.
-SELECT dea.continent, dea.location, dea.date, dea.population
-, MAX(vac.total_vaccinations) AS RollingPeopleVaccinated
-FROM PortfolioProject.dbo.CovidDeaths dea
-JOIN PortfolioProject.dbo.CovidVaccinations vac
-	ON dea.location = vac.location
-	AND dea.date = vac.date
-WHERE dea.continent IS NOT NULL 
-GROUP BY dea.continent, dea.location, dea.date, dea.population
-ORDER BY 1,2,3
-
--- 6. 
-WITH PopvsVac (Continent, Location, Date, Population, New_Vaccinations, RollingPeopleVaccinated) AS (
-SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
-, SUM(CONVERT(int,vac.new_vaccinations)) OVER (PARTITION BY dea.Location ORDER BY dea.location, dea.Date) AS RollingPeopleVaccinated
---, (RollingPeopleVaccinated/population)*100 
-FROM PortfolioProject.dbo.CovidDeaths dea
-JOIN PortfolioProject.dbo.CovidVaccinations vac
-	ON dea.location = vac.location
-	AND dea.date = vac.date
-WHERE dea.continent IS NOT NULL 
---ORDER BY 2,3
-)
-SELECT *, (RollingPeopleVaccinated/Population)*100 AS PercentPeopleVaccinated
-From PopvsVac
-
-
-
-
