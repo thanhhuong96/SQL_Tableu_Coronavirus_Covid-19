@@ -53,8 +53,8 @@ ORDER BY HighestDeathCount DESC
 
 -- GLOBAL NUMBERS
 
-SELECT SUM(new_cases) AS total_cases, SUM(CAST(new_deaths AS INT)) AS total_deaths
-	, SUM(CAST(new_deaths AS INT))/SUM(new_cases)*100 AS DeathPercentage
+SELECT SUM(new_cases) AS total_cases, SUM(CAST(new_deaths AS INT)) AS total_deaths,
+       SUM(CAST(new_deaths AS INT))/SUM(new_cases)*100 AS DeathPercentage
 FROM PortfolioProject.dbo.CovidDeaths
 ORDER BY 1,2
 
