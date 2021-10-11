@@ -56,7 +56,5 @@ ORDER BY HighestDeathCount DESC
 SELECT SUM(new_cases) AS total_cases, SUM(CAST(new_deaths AS INT)) AS total_deaths
 	, SUM(CAST(new_deaths AS INT))/SUM(new_cases)*100 AS DeathPercentage
 FROM PortfolioProject.dbo.CovidDeaths
---WHERE continent IS NOT NULL
---GROUP BY date
 ORDER BY 1,2
 
